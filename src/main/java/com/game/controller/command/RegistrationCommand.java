@@ -2,6 +2,7 @@ package com.game.controller.command;
 
 import com.game.domain.Role;
 import com.game.domain.User;
+import com.game.exception.RegistrationRuntimeException;
 import com.game.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,22 +21,22 @@ public class RegistrationCommand implements Command {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
-        userService.getUserByLogin(login).ifPresent(user -> {
-            throw new RuntimeException("User already exists!");
+        userService.findByLogin(login).ifPresent(user -> {
+            throw new RegistrationRuntimeException("User already exists!");
         });
         User user = User.builder()
                 .withLogin(login)
                 .withPassword(password)
                 .withRole(Role.PLAYER)
                 .build();
-        userService.createUser(user);
+        userService.register(user);
 
-        HttpSession session = request.getSession();
-        session.setAttribute("role", user.getRole());
+        request.getSession().setAttribute("role", user.getRole());
+        request.getSession().setAttribute("login", user.getLogin());
         if (user.getRole() == Role.JUDGE) {
-            return "redirect:/game/api/judge";
+            return "redirect:/game/api/judge?" + request.getQueryString();
         } else {
-            return "redirect:/game/api/player";
+            return "redirect:/game/api/player?" + request.getQueryString();
         }
     }
 }

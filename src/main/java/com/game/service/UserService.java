@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    Optional<User> getUserByLogin(String login);
+    User register(User user);
 
-    User createUser(User user);
+    Optional<User> findByLogin(String login);
 }

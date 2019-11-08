@@ -1,8 +1,12 @@
 package com.game.controller;
 
 import com.game.controller.command.*;
+import com.game.dao.GameDao;
+import com.game.dao.GameDaoImpl;
 import com.game.dao.UserDao;
 import com.game.dao.UserDaoImpl;
+import com.game.service.GameService;
+import com.game.service.GameServiceImpl;
 import com.game.service.UserService;
 import com.game.service.UserServiceImpl;
 
@@ -16,19 +20,24 @@ import java.util.Map;
 
 public class GlobalServlet extends HttpServlet {
 
-    private static Map<String, Command> commands = new HashMap<>();
+    private static final Map<String, Command> COMMANDS = new HashMap<>();
 
     @Override
     public void init() throws ServletException {
         UserDao userDao = new UserDaoImpl();
+        GameDao gameDao = new GameDaoImpl();
         UserService userService = new UserServiceImpl(userDao);
+        GameService gameService = new GameServiceImpl(gameDao);
 
-        commands.put("home", new HomeCommand());
-        commands.put("player", new PlayerHomeCommand());
-        commands.put("judge", new JudgeHomeCommand());
-        commands.put("login", new LoginCommand(userService));
-        commands.put("register", new RegistrationCommand(userService));
-        commands.put("logout", new LogoutCommand());
+        COMMANDS.put("home", new HomeCommand());
+        COMMANDS.put("player", new PlayerHomeCommand(gameService));
+        COMMANDS.put("judge", new JudgeHomeCommand());
+        COMMANDS.put("login", new LoginCommand(userService));
+        COMMANDS.put("register", new RegistrationCommand(userService));
+        COMMANDS.put("logout", new LogoutCommand());
+        COMMANDS.put("player/game", new PlayerGameCommand());
+        COMMANDS.put("judge/game", new JudgeGameCommand(gameService));
+        COMMANDS.put("error", new ErrorCommand());
     }
 
     @Override
@@ -36,7 +45,7 @@ public class GlobalServlet extends HttpServlet {
         String path = request.getRequestURI();
 
         path = path.replaceAll(".*game/api/", "");
-        Command command = commands.get(path);
+        Command command = COMMANDS.get(path);
         String page = command.execute(request);
 
         if (page.contains("redirect:")) {

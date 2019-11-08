@@ -7,8 +7,13 @@ public class QuestionSQLRuntimeException extends RuntimeException {
     public QuestionSQLRuntimeException() {
     }
 
+    public QuestionSQLRuntimeException(Throwable cause, String message) {
+        super(cause);
+        this.message += message;
+    }
+
     public QuestionSQLRuntimeException(String message) {
-        this.message = "Question Database Exception! " + message;
+        this.message += message;
     }
 
     @Override

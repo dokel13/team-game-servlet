@@ -11,6 +11,15 @@
     </servlet-mapping>
 
     <filter>
+        <filter-name>LocaleFilter</filter-name>
+        <filter-class>com.game.controller.filter.LocaleFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LocaleFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>EncodingFilter</filter-name>
         <filter-class>com.game.controller.filter.EncodingFilter</filter-class>
     </filter>
@@ -31,5 +40,10 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/api/error</location>
+    </error-page>
 
 </web-app>

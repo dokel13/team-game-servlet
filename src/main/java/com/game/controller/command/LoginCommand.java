@@ -2,6 +2,7 @@ package com.game.controller.command;
 
 import com.game.domain.Role;
 import com.game.domain.User;
+import com.game.exception.LoginRuntimeException;
 import com.game.service.UserService;
 import com.game.util.EncryptionUtils;
 
@@ -21,17 +22,17 @@ public class LoginCommand implements Command {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
-        User user = userService.getUserByLogin(login).orElseThrow(() -> new RuntimeException("User does not exist!"));
+        User user = userService.findByLogin(login).orElseThrow(() -> new LoginRuntimeException("User doesn't exist!"));
         if (EncryptionUtils.encrypt(password).equals(user.getPassword())) {
-            HttpSession session = request.getSession();
-            session.setAttribute("role", user.getRole());
+            request.getSession().setAttribute("role", user.getRole());
+            request.getSession().setAttribute("login", user.getLogin());
             if (user.getRole() == Role.JUDGE) {
-                return "redirect:/game/api/judge";
+                return "redirect:/game/api/judge?" + request.getQueryString();
             } else {
-                return "redirect:/game/api/player";
+                return "redirect:/game/api/player?" + request.getQueryString();
             }
         } else {
-            return "redirect:/game/api/home";
+            return "redirect:/game/api/home?" + request.getQueryString();
         }
     }
 }

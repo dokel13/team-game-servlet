@@ -2,10 +2,10 @@ package com.game.domain;
 
 public class User {
 
-    private Long id;
-    private String login;
+    private Integer id;
+    private final String login;
     private String password;
-    private Role role;
+    private final Role role;
 
     protected User(UserBuilder userBuilder) {
         this.id = userBuilder.id;
@@ -18,12 +18,8 @@ public class User {
         return new UserBuilder();
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getLogin() {
@@ -34,12 +30,16 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Role getRole() {
         return role;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class User {
     }
 
     public static class UserBuilder {
-        private Long id;
+        private Integer id;
         private String login;
         private String password;
         private Role role;
@@ -64,7 +64,7 @@ public class User {
             return new User(this);
         }
 
-        public UserBuilder withId(Long id) {
+        public UserBuilder withId(Integer id) {
             this.id = id;
             return this;
         }

@@ -1,0 +1,34 @@
+.home-body{
+    background: linear-gradient(0deg, #EEEEEE, #616161);
+}
+.logout{
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    color: black;
+    padding: 4px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    box-shadow: 0 5px 8px 0 rgba(255, 255, 0, 1), 0 9px 26px 0 rgba(255, 255, 0, 0.19);
+}
+.right-corner{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 20px 150px;
+    background: linear-gradient(60deg, rgba(97, 97, 97, 0) 0%, rgba(97, 97, 97, 0.5) 30%, blue 100%);
+}
+.create-game-button{
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    position: absolute;
+    padding: 4px;
+    text-decoration: none;
+    color: black;
+    top: 150px;
+    left: 20px;
+    font: 40px Verdana;
+}

@@ -9,11 +9,11 @@ public class UserSQLRuntimeException extends RuntimeException {
 
     public UserSQLRuntimeException(Throwable cause, String message) {
         super(cause);
-        this.message = message;
+        this.message += message;
     }
 
     public UserSQLRuntimeException(String message) {
-        this.message = "User Database Exception! " + message;
+        this.message += message;
     }
 
     @Override

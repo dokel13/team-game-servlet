@@ -1,7 +1,7 @@
 package com.game.controller.filter;
 
 import com.game.domain.Role;
-import com.game.exception.AccessForbiddenException;
+import com.game.exception.AccessForbiddenRuntimeException;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -18,19 +18,20 @@ public class AuthFilter implements Filter {
     public void init(FilterConfig filterConfig) {
         rolesAllowedURIs.put("/game/api/player", Role.PLAYER);
         rolesAllowedURIs.put("/game/api/judge", Role.JUDGE);
+        rolesAllowedURIs.put("/game/api/player/game", Role.PLAYER);
+        rolesAllowedURIs.put("/game/api/judge/game", Role.JUDGE);
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        HttpSession session = httpRequest.getSession();
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
 
-        Role role = (Role) session.getAttribute("role");
+        Role role = (Role) httpRequest.getSession().getAttribute("role");
         Role allowedRole = rolesAllowedURIs.get(httpRequest.getRequestURI());
         if (allowedRole == null || allowedRole == role) {
-            filterChain.doFilter(request, response);
+            filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            throw new AccessForbiddenException();
+            throw new AccessForbiddenRuntimeException("Authorisation access exception!");
         }
     }
 

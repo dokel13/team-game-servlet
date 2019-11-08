@@ -15,13 +15,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUserByLogin(String login) {
-        return userDao.getUserByLogin(login);
+    public User register(User user) {
+        user.setPassword(EncryptionUtils.encrypt(user.getPassword()));
+        return userDao.save(user);
     }
 
     @Override
-    public User createUser(User user) {
-        user.setPassword(EncryptionUtils.encrypt(user.getPassword()));
-        return userDao.createUser(user);
+    public Optional<User> findByLogin(String login) {
+        return userDao.findByLogin(login);
     }
 }

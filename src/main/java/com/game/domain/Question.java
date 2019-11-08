@@ -2,7 +2,7 @@ package com.game.domain;
 
 public class Question {
 
-    private Long id;
+    private Integer id;
     private String body;
     private String answer;
     private String help;
@@ -26,7 +26,7 @@ public class Question {
         return new QuestionBuilder();
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -73,7 +73,7 @@ public class Question {
     }
 
     public static class QuestionBuilder {
-        private Long id;
+        private Integer id;
         private String body;
         private String answer;
         private String help;
@@ -89,7 +89,7 @@ public class Question {
             return new Question(this);
         }
 
-        public QuestionBuilder withId(Long id) {
+        public QuestionBuilder withId(Integer id) {
             this.id = id;
             return this;
         }
