@@ -13,9 +13,7 @@ public class StatisticsMapper implements Mapper<Statistics> {
         return Statistics.builder()
                 .withJudge(resultSet.getString("judge"))
                 .withTeam(resultSet.getString("team"))
-                .withCaptain(resultSet.getString("captain"))
-                .withRightAnswers(resultSet.getInt("right_answers"))
-                .withWrongAnswers(resultSet.getInt("wrong_answer"))
+                .withPlayersAmount(resultSet.getInt("players_amount"))
                 .withWinner(resultSet.getString("winner"))
                 .build();
     }

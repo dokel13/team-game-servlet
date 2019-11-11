@@ -13,7 +13,7 @@ public class GameMapper implements Mapper<Game> {
         return Game.builder()
                 .withId(resultSet.getInt("game_id"))
                 .withJudge(resultSet.getString("judge"))
-                .withActivity(resultSet.getBoolean("activity"))
+                .withActivity(resultSet.getBoolean("active"))
                 .build();
     }
 }

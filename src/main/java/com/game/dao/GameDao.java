@@ -12,7 +12,5 @@ public interface GameDao {
 
     Game save(Game game);
 
-    List<Game> findAllActive();
-
-    List<Statistics> findAllStatistics();
+    Optional<List<Game>> findAllActive();
 }

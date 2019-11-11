@@ -36,30 +36,31 @@
                 </c:forEach>
             </tbody>
         </table>
-        <table class="statistics-table">
-            <caption>Games Statistics</caption>
-            <thead>
+        <div class="statistics-table-form">
+            <table class="statistics-table">
+                <caption>Games Statistics</caption>
+                <thead>
                 <tr>
                     <th>Judge</th>
                     <th>Team</th>
-                    <th>Captain</th>
-                    <th>Right Answers</th>
-                    <th>Wrong Answers</th>
+                    <th>Players Amount</th>
                     <th>Winner</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <c:forEach items="${statistics}" var="statistic">
                     <tr>
-                        <td>$(statistic.judge}</td>
+                        <td>${statistic.judge}</td>
                         <td>${statistic.team}</td>
-                        <td>${statistic.captain}</td>
-                        <td>${statistic.rightAnswers}</td>
-                        <td>${statistic.wrongAnswers}</td>
+                        <td>${statistic.playersAmount}</td>
                         <td>${statistic.winner}</td>
                     </tr>
                 </c:forEach>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+            <a href="${pageContext.request.contextPath}/api/player?locale=${sessionScope.locale}&page=1">1</a>
+            <a href="${pageContext.request.contextPath}/api/player?locale=${sessionScope.locale}&page=2">2</a>
+            <a href="${pageContext.request.contextPath}/api/player?locale=${sessionScope.locale}&page=3">3</a>
+        </div>
     </body>
 </html>

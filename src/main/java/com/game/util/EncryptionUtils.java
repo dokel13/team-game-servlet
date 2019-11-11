@@ -1,5 +1,7 @@
 package com.game.util;
 
+import com.game.exception.EncryptorRuntimeException;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -11,7 +13,7 @@ public class EncryptionUtils {
             byte[] array = md.digest(value.getBytes());
             return new String(array);
         } catch(NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            throw new EncryptorRuntimeException(e, "Encryptor Failure!");
         }
     }
 }

@@ -1,10 +1,7 @@
 package com.game.controller;
 
 import com.game.controller.command.*;
-import com.game.dao.GameDao;
-import com.game.dao.GameDaoImpl;
-import com.game.dao.UserDao;
-import com.game.dao.UserDaoImpl;
+import com.game.dao.*;
 import com.game.service.GameService;
 import com.game.service.GameServiceImpl;
 import com.game.service.UserService;
@@ -26,8 +23,9 @@ public class GlobalServlet extends HttpServlet {
     public void init() throws ServletException {
         UserDao userDao = new UserDaoImpl();
         GameDao gameDao = new GameDaoImpl();
+        StatisticsDao statisticsDao = new StatisticsDaoImpl();
         UserService userService = new UserServiceImpl(userDao);
-        GameService gameService = new GameServiceImpl(gameDao);
+        GameService gameService = new GameServiceImpl(gameDao, statisticsDao);
 
         COMMANDS.put("home", new HomeCommand());
         COMMANDS.put("player", new PlayerHomeCommand(gameService));

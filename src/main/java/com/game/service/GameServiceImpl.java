@@ -1,6 +1,7 @@
 package com.game.service;
 
 import com.game.dao.GameDao;
+import com.game.dao.StatisticsDao;
 import com.game.domain.Game;
 import com.game.domain.Statistics;
 
@@ -11,8 +12,11 @@ public class GameServiceImpl implements GameService {
 
     private GameDao gameDao;
 
-    public GameServiceImpl(GameDao gameDao) {
+    private StatisticsDao statisticsDao;
+
+    public GameServiceImpl(GameDao gameDao, StatisticsDao statisticsDao) {
         this.gameDao = gameDao;
+        this.statisticsDao = statisticsDao;
     }
 
     @Override
@@ -27,11 +31,11 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public List<Game> findAllActive() {
-        return gameDao.findAllActive();
+        return gameDao.findAllActive().get();
     }
 
     @Override
-    public List<Statistics> findAllStatistics() {
-        return gameDao.findAllStatistics();
+    public List<Statistics> findAllStatistics(Integer page, Integer pageSize) {
+        return statisticsDao.findPaginatedStatistics(page, pageSize).get();
     }
 }

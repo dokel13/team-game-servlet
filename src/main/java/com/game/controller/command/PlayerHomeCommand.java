@@ -17,8 +17,14 @@ public class PlayerHomeCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
+        Integer page;
+        if (request.getParameter("page") == null) {
+            page = 0;
+        } else {
+            page = Integer.parseInt(request.getParameter("page")) - 1;
+        }
+        List<Statistics> statistics = gameService.findAllStatistics(page, 3);
         List<Game> activeGames = gameService.findAllActive();
-        List<Statistics> statistics = gameService.findAllStatistics();
         request.setAttribute("activeGames", activeGames);
         request.setAttribute("statistics", statistics);
         return "/WEB-INF/jsp/player/home.jsp";

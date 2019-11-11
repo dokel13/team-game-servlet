@@ -14,5 +14,5 @@ public interface GameService {
 
     List<Game> findAllActive();
 
-    List<Statistics> findAllStatistics();
+    List<Statistics> findAllStatistics(Integer page, Integer pageSize);
 }

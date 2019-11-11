@@ -1,16 +1,16 @@
 package com.game.domain;
 
+import java.util.Objects;
+
 public class Game {
     private Integer id;
     private final String judge;
     private Boolean activity;
-    private GameConfig gameConfig;
 
     protected Game(GameBuilder gameBuilder) {
         this.id = gameBuilder.id;
         this.judge = gameBuilder.judge;
         this.activity = gameBuilder.activity;
-        this.gameConfig = gameBuilder.gameConfig;
     }
 
     public static GameBuilder builder() {
@@ -29,10 +29,6 @@ public class Game {
         return activity;
     }
 
-    public GameConfig getGameConfig() {
-        return gameConfig;
-    }
-
     public Game setId(Integer id) {
         this.id = id;
         return this;
@@ -43,9 +39,19 @@ public class Game {
         return this;
     }
 
-    public Game setGameConfig(GameConfig gameConfig) {
-        this.gameConfig = gameConfig;
-        return this;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Game)) return false;
+        Game game = (Game) o;
+        return Objects.equals(id, game.id) &&
+                Objects.equals(judge, game.judge) &&
+                Objects.equals(activity, game.activity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, judge, activity);
     }
 
     @Override
@@ -54,7 +60,6 @@ public class Game {
                 "id=" + id +
                 ", judge=" + judge +
                 ", activity=" + activity +
-                ", gameConfig=" + gameConfig +
                 '}';
     }
 
@@ -62,7 +67,6 @@ public class Game {
         private Integer id;
         private String judge;
         private Boolean activity;
-        private GameConfig gameConfig;
 
         public GameBuilder() {
         }
@@ -83,11 +87,6 @@ public class Game {
 
         public GameBuilder withActivity(Boolean activity) {
             this.activity = activity;
-            return this;
-        }
-
-        public GameBuilder withGameConfig(GameConfig gameConfig) {
-            this.gameConfig = gameConfig;
             return this;
         }
     }

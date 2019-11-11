@@ -4,17 +4,15 @@ public class Statistics {
 
     private final String judge;
     private final String team;
-    private final String captain;
     private final int rightAnswers;
-    private final int wrongAnswers;
+    private final int playersAmount;
     private final String winner;
 
     protected Statistics(StatisticsBuilder statisticsBuilder) {
         this.judge = statisticsBuilder.judge;
         this.team = statisticsBuilder.team;
-        this.captain = statisticsBuilder.captain;
         this.rightAnswers = statisticsBuilder.rightAnswers;
-        this.wrongAnswers = statisticsBuilder.wrongAnswers;
+        this.playersAmount = statisticsBuilder.playersAmount;
         this.winner = statisticsBuilder.winner;
     }
 
@@ -30,16 +28,12 @@ public class Statistics {
         return team;
     }
 
-    public String getCaptain() {
-        return captain;
-    }
-
     public int getRightAnswers() {
         return rightAnswers;
     }
 
-    public int getWrongAnswers() {
-        return wrongAnswers;
+    public int getPlayersAmount() {
+        return playersAmount;
     }
 
     public String getWinner() {
@@ -51,9 +45,8 @@ public class Statistics {
         return "Statistics{" +
                 "judge='" + judge + '\'' +
                 ", team='" + team + '\'' +
-                ", captain='" + captain + '\'' +
                 ", rightAnswers=" + rightAnswers +
-                ", wrongAnswers=" + wrongAnswers +
+                ", playersAmount=" + playersAmount +
                 ", winner=" + winner +
                 '}';
     }
@@ -61,9 +54,8 @@ public class Statistics {
     public static class StatisticsBuilder {
         private String judge;
         private String team;
-        private String captain;
         private int rightAnswers;
-        private int wrongAnswers;
+        private int playersAmount;
         private String winner;
 
         private StatisticsBuilder() {
@@ -83,18 +75,13 @@ public class Statistics {
             return this;
         }
 
-        public StatisticsBuilder withCaptain(String captain) {
-            this.captain = captain;
-            return this;
-        }
-
         public StatisticsBuilder withRightAnswers(int rightAnswers) {
             this.rightAnswers = rightAnswers;
             return this;
         }
 
-        public StatisticsBuilder withWrongAnswers(int wrongAnswers) {
-            this.wrongAnswers = wrongAnswers;
+        public StatisticsBuilder withPlayersAmount(int playersAmount) {
+            this.playersAmount = playersAmount;
             return this;
         }
 

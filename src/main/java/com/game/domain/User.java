@@ -1,5 +1,7 @@
 package com.game.domain;
 
+import java.util.Objects;
+
 public class User {
 
     private Integer id;
@@ -40,6 +42,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) &&
+                Objects.equals(login, user.login) &&
+                Objects.equals(password, user.password) &&
+                role == user.role;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, login, password, role);
     }
 
     @Override

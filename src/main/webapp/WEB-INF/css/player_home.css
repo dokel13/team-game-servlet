@@ -1,10 +1,12 @@
 .home-body{
     background: linear-gradient(0deg, #EEEEEE, #616161);
 }
-.statistics-table{
+.statistics-table-form{
     position: absolute;
     top: 150px;
     right: 150px;
+}
+.statistics-table{
     width: 500px;
     border: 3px black;
     border-collapse: collapse;
@@ -15,6 +17,13 @@
 .statistics-table th{
     background-color: ghostwhite;
     border: 1px solid darkslategray;
+}
+.statistics-table td{
+    background-color: #5B5B5B;
+    border: 1px solid black;
+    font-family: "Courier New";
+    text-align: left;
+    color: white;
 }
 .statistics-table caption{
     font: bold 24px Verdana;

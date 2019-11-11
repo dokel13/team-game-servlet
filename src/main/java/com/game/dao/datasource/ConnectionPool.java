@@ -11,27 +11,15 @@ public class ConnectionPool {
 
     private static final ResourceBundle DATABASE_PROPERTIES = ResourceBundle.getBundle("database");
 
-    private static ConnectionPool instance;
     private DataSource dataSource;
 
-    private ConnectionPool() {
+    public ConnectionPool() {
         BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setUsername(DATABASE_PROPERTIES.getString("db.connection.user"));
         basicDataSource.setPassword(DATABASE_PROPERTIES.getString("db.connection.password"));
         basicDataSource.setDriverClassName(DATABASE_PROPERTIES.getString("db.connection.driver"));
         basicDataSource.setUrl(DATABASE_PROPERTIES.getString("db.connection.datasource.url"));
         dataSource = basicDataSource;
-    }
-
-    public static ConnectionPool getInstance() {
-        if (instance == null) {
-            synchronized (ConnectionPool.class) {
-                if (instance == null) {
-                    instance = new ConnectionPool();
-                }
-            }
-        }
-        return instance;
     }
 
     public Connection getConnection() {
