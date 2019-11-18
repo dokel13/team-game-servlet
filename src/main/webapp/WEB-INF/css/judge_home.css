@@ -32,3 +32,30 @@
     left: 20px;
     font: 40px Verdana;
 }
+.questions-table-form{
+    position: absolute;
+    top: 150px;
+    right: 150px;
+}
+.questions-table{
+    width: 500px;
+    border: 3px black;
+    border-collapse: collapse;
+    color: black;
+    font-family: "Comic Sans MS";
+    overflow-y: scroll;
+}
+.questions-table th{
+    background-color: ghostwhite;
+    border: 1px solid darkslategray;
+}
+.questions-table td{
+    background-color: #5B5B5B;
+    border: 1px solid black;
+    font-family: "Courier New";
+    text-align: left;
+    color: white;
+}
+.questions-table caption{
+    font: bold 24px Verdana;
+}

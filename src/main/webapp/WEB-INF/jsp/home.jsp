@@ -10,7 +10,8 @@
         <style><%@include file="/WEB-INF/css/home.css"%></style>
     </head>
     <div class="language">
-        <a href="${pageContext.request.contextPath}/api/home?locale=ua" title="choose Ukrainian">UA</a>/
+        <fmt:message var="choose_ukrainian" key="choose_ukrainian" bundle="${application}"/>
+        <a href="${pageContext.request.contextPath}/api/home?locale=ua" title="${choose_ukrainian}">UA</a>/
         <a href="${pageContext.request.contextPath}/api/home?locale=en" title="choose English">EN</a>
     </div>
         <div class="login-container">

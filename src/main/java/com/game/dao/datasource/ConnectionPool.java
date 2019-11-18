@@ -2,24 +2,24 @@ package com.game.dao.datasource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ConnectionPool {
 
-    private static final ResourceBundle DATABASE_PROPERTIES = ResourceBundle.getBundle("database");
+//    private final ResourceBundle DATABASE_PROPERTIES = ResourceBundle.getBundle("database");
+    private BasicDataSource dataSource;
 
-    private DataSource dataSource;
+    private final ResourceBundle databaseProperties;
 
-    public ConnectionPool() {
-        BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setUsername(DATABASE_PROPERTIES.getString("db.connection.user"));
-        basicDataSource.setPassword(DATABASE_PROPERTIES.getString("db.connection.password"));
-        basicDataSource.setDriverClassName(DATABASE_PROPERTIES.getString("db.connection.driver"));
-        basicDataSource.setUrl(DATABASE_PROPERTIES.getString("db.connection.datasource.url"));
-        dataSource = basicDataSource;
+    public ConnectionPool(String fileName) {
+        databaseProperties = ResourceBundle.getBundle(fileName);
+        this.dataSource = new BasicDataSource();
+        dataSource.setUsername(databaseProperties.getString("db.connection.user"));
+        dataSource.setPassword(databaseProperties.getString("db.connection.password"));
+        dataSource.setDriverClassName(databaseProperties.getString("db.connection.driver"));
+        dataSource.setUrl(databaseProperties.getString("db.connection.datasource.url"));
     }
 
     public Connection getConnection() {

@@ -1,10 +1,11 @@
 package com.game.service;
 
-import com.game.domain.User;
 import com.game.dao.UserDao;
-import com.game.util.EncryptionUtils;
+import com.game.domain.User;
 
 import java.util.Optional;
+
+import static com.game.util.EncryptionUtils.encrypt;
 
 public class UserServiceImpl implements UserService {
 
@@ -16,7 +17,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(User user) {
-        user.setPassword(EncryptionUtils.encrypt(user.getPassword()));
+        user.setPassword(encrypt(user.getPassword()));
         return userDao.save(user);
     }
 

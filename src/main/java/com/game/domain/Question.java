@@ -1,5 +1,7 @@
 package com.game.domain;
 
+import java.util.Objects;
+
 public class Question {
 
     private Integer id;
@@ -8,8 +10,6 @@ public class Question {
     private String help;
     private String second_answer;
     private String third_answer;
-    private String fourth_answer;
-    private String author;
 
     public Question(QuestionBuilder questionBuilder) {
         this.id = questionBuilder.id;
@@ -18,8 +18,6 @@ public class Question {
         this.help = questionBuilder.help;
         this.second_answer = questionBuilder.second_answer;
         this.third_answer = questionBuilder.third_answer;
-        this.fourth_answer = questionBuilder.fourth_answer;
-        this.author = questionBuilder.author;
     }
 
     public static QuestionBuilder builder() {
@@ -50,12 +48,22 @@ public class Question {
         return third_answer;
     }
 
-    public String getFourth_answer() {
-        return fourth_answer;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Question)) return false;
+        Question question = (Question) o;
+        return Objects.equals(id, question.id) &&
+                Objects.equals(body, question.body) &&
+                Objects.equals(answer, question.answer) &&
+                Objects.equals(help, question.help) &&
+                Objects.equals(second_answer, question.second_answer) &&
+                Objects.equals(third_answer, question.third_answer);
     }
 
-    public String getAuthor() {
-        return author;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, body, answer, help, second_answer, third_answer);
     }
 
     @Override
@@ -67,8 +75,6 @@ public class Question {
                 ", help='" + help + '\'' +
                 ", second_answer='" + second_answer + '\'' +
                 ", third_answer='" + third_answer + '\'' +
-                ", fourth_answer='" + fourth_answer + '\'' +
-                ", author='" + author + '\'' +
                 '}';
     }
 
@@ -79,8 +85,6 @@ public class Question {
         private String help;
         private String second_answer;
         private String third_answer;
-        private String fourth_answer;
-        private String author;
 
         private QuestionBuilder() {
         }
@@ -116,16 +120,6 @@ public class Question {
 
         public QuestionBuilder withThird_answer(String third_answer) {
             this.third_answer = third_answer;
-            return this;
-        }
-
-        public QuestionBuilder withFourth_answer(String fourth_answer) {
-            this.fourth_answer = fourth_answer;
-            return this;
-        }
-
-        public QuestionBuilder withAuthor(String author) {
-            this.author = author;
             return this;
         }
     }

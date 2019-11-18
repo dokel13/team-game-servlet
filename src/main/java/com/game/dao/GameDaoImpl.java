@@ -3,7 +3,7 @@ package com.game.dao;
 import com.game.dao.mapper.GameMapper;
 import com.game.dao.mapper.Mapper;
 import com.game.domain.Game;
-import com.game.exception.GameSQLRuntimeException;
+import com.game.exception.DatabaseRuntimeException;
 
 import java.sql.*;
 import java.util.List;
@@ -32,7 +32,7 @@ public class GameDaoImpl extends AbstractDao<Game> implements GameDao {
             }
             return game;
         } catch (SQLException e) {
-            throw new GameSQLRuntimeException(e, "Game saving operation exception!");
+            throw new DatabaseRuntimeException(e, "Game saving operation exception!");
         }
     }
 
@@ -45,19 +45,19 @@ public class GameDaoImpl extends AbstractDao<Game> implements GameDao {
 
             return constructResult(resultSet);
         } catch (SQLException e) {
-            throw new GameSQLRuntimeException(e, "Game finding by id operation exception!");
+            throw new DatabaseRuntimeException(e, "Game finding by id operation exception!");
         }
     }
 
     @Override
-    public Optional<List<Game>> findAllActive() {
+    public List<Game> findAllActive() {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(getSql("select.active.games"))) {
             ResultSet resultSet = statement.executeQuery();
 
             return constructMultivaluedResult(resultSet);
         } catch (SQLException e) {
-            throw new GameSQLRuntimeException(e, "Finding all active games operation exception!");
+            throw new DatabaseRuntimeException(e, "Finding all active games operation exception!");
         }
     }
 }

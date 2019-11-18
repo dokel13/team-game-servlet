@@ -3,7 +3,7 @@ package com.game.dao;
 import com.game.dao.mapper.Mapper;
 import com.game.dao.mapper.UserMapper;
 import com.game.domain.User;
-import com.game.exception.UserSQLRuntimeException;
+import com.game.exception.DatabaseRuntimeException;
 
 import java.sql.*;
 import java.util.Optional;
@@ -32,7 +32,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
             }
             return user;
         } catch (SQLException e) {
-            throw new UserSQLRuntimeException(e, "User saving operation exception!");
+            throw new DatabaseRuntimeException(e, "User saving operation exception!");
         }
     }
 
@@ -45,7 +45,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
             return constructResult(resultSet);
         } catch (SQLException e) {
-            throw new UserSQLRuntimeException(e, "User finding by login operation exception!");
+            throw new DatabaseRuntimeException(e, "User finding by login operation exception!");
         }
     }
 }

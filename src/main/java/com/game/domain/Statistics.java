@@ -1,5 +1,7 @@
 package com.game.domain;
 
+import java.util.Objects;
+
 public class Statistics {
 
     private final String judge;
@@ -38,6 +40,23 @@ public class Statistics {
 
     public String getWinner() {
         return winner;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Statistics)) return false;
+        Statistics that = (Statistics) o;
+        return rightAnswers == that.rightAnswers &&
+                playersAmount == that.playersAmount &&
+                Objects.equals(judge, that.judge) &&
+                Objects.equals(team, that.team) &&
+                Objects.equals(winner, that.winner);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(judge, team, rightAnswers, playersAmount, winner);
     }
 
     @Override

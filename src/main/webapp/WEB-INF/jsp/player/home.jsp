@@ -12,7 +12,8 @@
     <body class="home-body">
         <div class="right-corner">
             <div class="language">
-                <a href="${pageContext.request.contextPath}/api/player?locale=ua" title="choose Ukrainian">UA</a>/
+                <fmt:message var="choose_ukrainian" key="choose_ukrainian" bundle="${application}"/>
+                <a href="${pageContext.request.contextPath}/api/player?locale=ua" title="${choose_ukrainian}">UA</a>/
                 <a href="${pageContext.request.contextPath}/api/player?locale=en" title="choose English">EN</a>
             </div>
             <fmt:message var="logout" key="logout" bundle="${application}"/>
@@ -38,13 +39,13 @@
         </table>
         <div class="statistics-table-form">
             <table class="statistics-table">
-                <caption>Games Statistics</caption>
+                <caption><fmt:message key="games_statistics" bundle="${application}"/></caption>
                 <thead>
                 <tr>
-                    <th>Judge</th>
-                    <th>Team</th>
-                    <th>Players Amount</th>
-                    <th>Winner</th>
+                    <th><fmt:message key="judge" bundle="${application}"/></th>
+                    <th><fmt:message key="team" bundle="${application}"/></th>
+                    <th><fmt:message key="players_amount" bundle="${application}"/></th>
+                    <th><fmt:message key="winner" bundle="${application}"/></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -58,9 +59,6 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <a href="${pageContext.request.contextPath}/api/player?locale=${sessionScope.locale}&page=1">1</a>
-            <a href="${pageContext.request.contextPath}/api/player?locale=${sessionScope.locale}&page=2">2</a>
-            <a href="${pageContext.request.contextPath}/api/player?locale=${sessionScope.locale}&page=3">3</a>
         </div>
     </body>
 </html>

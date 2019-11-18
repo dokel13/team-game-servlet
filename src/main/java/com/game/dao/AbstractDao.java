@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 
 public abstract class AbstractDao<T> {
 
-    private final ConnectionPool connectionPool = new ConnectionPool();
+    private final ConnectionPool connectionPool = new ConnectionPool("database");
 
     private final ResourceBundle resourceBundle = ResourceBundle.getBundle("queries");
 
@@ -27,12 +27,12 @@ public abstract class AbstractDao<T> {
         return resourceBundle.getString(queryName);
     }
 
-    protected Optional<List<T>> constructMultivaluedResult(ResultSet resultSet) throws SQLException {
+    protected List<T> constructMultivaluedResult(ResultSet resultSet) throws SQLException {
         List<T> result = new ArrayList<>();
         while (resultSet.next()) {
             result.add(getMapper().map(resultSet));
         }
-        return result.isEmpty() ? Optional.empty() : Optional.of(result);
+        return result;
     }
 
     protected Optional<T> constructResult(ResultSet resultSet) throws SQLException {

@@ -1,6 +1,7 @@
 package com.game.service;
 
 import com.game.domain.Game;
+import com.game.domain.Question;
 import com.game.domain.Statistics;
 
 import java.util.List;
@@ -10,9 +11,11 @@ public interface GameService {
 
     Game create(Game game);
 
-    Optional<Game> findById(Integer id);
+    Optional<Game> findGameById(Integer id);
 
-    List<Game> findAllActive();
+    List<Game> findAllActiveGames();
 
     List<Statistics> findAllStatistics(Integer page, Integer pageSize);
+
+    List<Question> findRandomQuestions(Integer amount);
 }

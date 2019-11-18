@@ -6,7 +6,6 @@ import com.game.exception.RegistrationRuntimeException;
 import com.game.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class RegistrationCommand implements Command {
 
@@ -33,10 +32,7 @@ public class RegistrationCommand implements Command {
 
         request.getSession().setAttribute("role", user.getRole());
         request.getSession().setAttribute("login", user.getLogin());
-        if (user.getRole() == Role.JUDGE) {
-            return "redirect:/game/api/judge?" + request.getQueryString();
-        } else {
-            return "redirect:/game/api/player?" + request.getQueryString();
-        }
+
+        return "redirect:/game/api/player?" + request.getQueryString();
     }
 }

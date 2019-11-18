@@ -14,6 +14,7 @@ public class JudgeGameCommand implements Command {
     public JudgeGameCommand(GameService gameService) {
         this.gameService = gameService;
     }
+
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();

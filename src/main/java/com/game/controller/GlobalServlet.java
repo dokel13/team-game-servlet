@@ -24,12 +24,13 @@ public class GlobalServlet extends HttpServlet {
         UserDao userDao = new UserDaoImpl();
         GameDao gameDao = new GameDaoImpl();
         StatisticsDao statisticsDao = new StatisticsDaoImpl();
+        QuestionDao questionDao = new QuestionDaoImpl();
         UserService userService = new UserServiceImpl(userDao);
-        GameService gameService = new GameServiceImpl(gameDao, statisticsDao);
+        GameService gameService = new GameServiceImpl(gameDao, statisticsDao, questionDao);
 
         COMMANDS.put("home", new HomeCommand());
         COMMANDS.put("player", new PlayerHomeCommand(gameService));
-        COMMANDS.put("judge", new JudgeHomeCommand());
+        COMMANDS.put("judge", new JudgeHomeCommand(gameService));
         COMMANDS.put("login", new LoginCommand(userService));
         COMMANDS.put("register", new RegistrationCommand(userService));
         COMMANDS.put("logout", new LogoutCommand());

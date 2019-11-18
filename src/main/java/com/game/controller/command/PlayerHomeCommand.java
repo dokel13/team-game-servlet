@@ -24,9 +24,10 @@ public class PlayerHomeCommand implements Command {
             page = Integer.parseInt(request.getParameter("page")) - 1;
         }
         List<Statistics> statistics = gameService.findAllStatistics(page, 3);
-        List<Game> activeGames = gameService.findAllActive();
+        List<Game> activeGames = gameService.findAllActiveGames();
         request.setAttribute("activeGames", activeGames);
         request.setAttribute("statistics", statistics);
+
         return "/WEB-INF/jsp/player/home.jsp";
     }
 }

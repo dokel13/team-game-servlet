@@ -11,19 +11,19 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 
+import static com.game.util.EncryptionUtils.encrypt;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceImplTest {
 
     @Mock
-    UserDao userDao;
+    private UserDao userDao;
 
     @InjectMocks
-    UserServiceImpl userService;
+    private UserServiceImpl userService;
 
     private final User user = User.builder()
             .withLogin("name")
@@ -33,9 +33,13 @@ public class UserServiceImplTest {
 
     @Test
     public void registerShouldReturnUser() {
-        when(userDao.save(any(User.class))).thenReturn(user);
-        User userActual = userService.register(user);
-        assertThat(userActual, is(user));
+        User userActual = User.builder()
+                .withLogin("name")
+                .withPassword("password")
+                .withRole(Role.PLAYER)
+                .build();
+        when(userDao.save(user)).thenReturn(user);
+        assertThat(userService.register(userActual), is(user));
     }
 
     @Test
